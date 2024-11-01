@@ -1,20 +1,20 @@
 apiVersion: apps/v1 #[1. API의 버전 정보]
 kind: Deployment #[2. 리소스의 종류]
 metadata:
-  name: httpd-deployment #[3. 리소스의 이름]
+  name: nginx-deployment #[3. 리소스의 이름]
 spec:
-  replicas: 2 #[4. 리소스의 상세 정보]
+  replicas: 1 #[4. 리소스의 상세 정보]
   selector:
     matchLabels:
-      app: httpd
+      app: nginx
   template:
     metadata:
       labels:
-        app: httpd 
+        app: nginx 
     spec: 
       containers: 
-      - name: httpd
-        image: httpd
+      - name: nginx
+        image: nginx
         ports: 
         - containerPort: 80
 
@@ -22,13 +22,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata: 
-  name: httpd-service
+  name: nginx-service
 spec:
   selector:
-   app: httpd
+   app: nginx
   ports: 
   - protocol: TCP
     port: 80 
     targetPort: 80
-  type: ClusterIP
+  type: NodePort
             
