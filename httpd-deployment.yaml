@@ -3,7 +3,7 @@ kind: Deployment #[2. 리소스의 종류]
 metadata:
   name: httpd-deployment #[3. 리소스의 이름]
 spec:
-  replicas: 2 #[4. 리소스의 상세 정보]
+  replicas: 1  #[4. 리소스의 상세 정보]
   selector:
     matchLabels:
       app: httpd
@@ -17,6 +17,13 @@ spec:
         image: httpd
         ports: 
         - containerPort: 80
+        resources:
+          requests:
+            cpu: 15m 
+            memory: 10Mi
+          limits:
+            cpu: 15m
+            memory: 10Mi
 
 ---
 apiVersion: v1
