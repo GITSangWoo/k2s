@@ -4,7 +4,7 @@ metadata:
   name: nginx-config #[3. 리소스의 이름]
 data:
   default.conf: |
-    upstream httpd-service{
+    upstream httpd_upstream {
       server httpd-service:80;
     }
 
