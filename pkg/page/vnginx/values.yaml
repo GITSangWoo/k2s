@@ -1,0 +1,20 @@
+releaseName: my-release
+
+httpd:
+  enabled: true
+  images:
+    repository: httpd
+    tag: latest 
+  service:
+    type: ClusterIP
+    port: 80 
+
+nginx: 
+  enabled: true
+  images:
+    repository: nginx
+    tag: latest 
+  service:
+    type: NodePort
+    port: 80 
+
