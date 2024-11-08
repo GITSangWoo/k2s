@@ -1,0 +1,42 @@
+apiVersion: apps/v1 #[1. API의 버전 정보]
+kind: Deployment #[2. 리소스의 종류]
+metadata:
+  name: nginx-deployment #[3. 리소스의 이름]
+spec:
+  replicas: 1 #[4. 리소스의 상세 정보]
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx 
+    spec: 
+      containers: 
+      - name: nginx
+        image: nginx
+        ports: 
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /etc/nginx/conf.d/default.conf
+          name: nginx-config
+          subPath: default.conf
+      volumes: 
+      - name: nginx-config
+        configMap:
+          name: nginx-config 
+
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: nginx-service
+spec:
+  selector:
+   app: nginx
+  ports: 
+  - protocol: TCP
+    port: 80 
+    targetPort: 80
+  type: NodePort
+            
